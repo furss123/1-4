@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 남악고등학교 1-4반 수행평가 안내
 
-## Getting Started
+고등학교 1학년 4반 수행평가 일정·제출 방법을 Google 시트와 연동해 보여 주는 모바일 웹 앱입니다.
 
-First, run the development server:
+## 기술 스택
+
+- Next.js (App Router)
+- Tailwind CSS
+- Google Sheets (공개 시트 / OAuth / 서비스 계정)
+
+## 실행
 
 ```bash
+npm install
+cp .env.local.example .env.local   # Windows: copy .env.local.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Google 시트 연동
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+학교 조직 정책으로 **서비스 계정 키**를 만들 수 없으면 `.env.local`에 다음을 사용하세요.
 
-## Learn More
+```env
+GOOGLE_SHEET_ACCESS=public
+GOOGLE_SHEET_ID=스프레드시트_ID
+GOOGLE_SHEET_NAME=시트1
+```
 
-To learn more about Next.js, take a look at the following resources:
+시트 공유: **링크가 있는 모든 사용자 · 뷰어**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+자세한 내용: `secrets/README.txt`, `npm run check:google`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 스크립트
 
-## Deploy on Vercel
+| 명령 | 설명 |
+|------|------|
+| `npm run dev` | 개발 서버 (Webpack) |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run check:google` | Google 환경 변수 점검 |
+| `npm run setup:oauth` | OAuth 리프레시 토큰 발급 |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 브랜치
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `1-4` — 1학년 4반 수행평가 로드맵
