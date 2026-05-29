@@ -18,6 +18,15 @@ npm run dev
 
 [http://localhost:3000](http://localhost:3000)
 
+## GitHub Pages (웹에서 보기)
+
+저장소: **https://github.com/furss123/1-4**
+
+배포 주소: **https://furss123.github.io/1-4/**
+
+1. GitHub 저장소 → **Settings → Pages** → Source: **GitHub Actions**
+2. `1-4` 브랜치에 push 시 자동 배포
+
 ## Google 시트 연동
 
 학교 조직 정책으로 **서비스 계정 키**를 만들 수 없으면 `.env.local`에 다음을 사용하세요.
