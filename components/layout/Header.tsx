@@ -17,7 +17,7 @@ export function Header() {
           priority
           unoptimized
         />
-        <div className="flex h-[4.5rem] min-w-0 flex-1 flex-col justify-center gap-[2pt]">
+        <div className="flex h-[4.5rem] min-w-0 flex-1 flex-col justify-center gap-[calc(2pt+2mm)]">
           <p className="text-[calc(1.5625rem-4pt)] font-bold leading-none text-school">
             {APP_CLASS_LABEL}
           </p>
