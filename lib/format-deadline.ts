@@ -4,8 +4,6 @@ const GVIZ_DATE_RE = /^Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+)(?:,(\d+))?)?\)$/;
 const KOREAN_DATE_RE =
   /(?:(\d{4})[.\-/년\s]*)?(\d{1,2})\s*월\s*(\d{1,2})\s*일(?:\s*\(([일월화수목금토])\))?/;
 const SLASH_DATE_RE = /^(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/;
-const SHORT_DOT_DATE_RE =
-  /^(\d{1,2})\.(\d{1,2})(?:\s*(?:\(([일월화수목금토])\)|([일월화수목금토])))?/;
 const TIME_SUFFIX_RE =
   /(?:\s|,|·)*((?:\d{1,2}교시)|(?:오전|오후)\s*\d{1,2}(?::\d{2})?\s*시(?:\s*\d{1,2}\s*분)?|\d{1,2}:\d{2}(?::\d{2})?)\s*$/i;
 
@@ -89,18 +87,6 @@ function parseKoreanDate(value: string): Date | null {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function parseShortDotDate(value: string): Date | null {
-  const match = value.trim().match(SHORT_DOT_DATE_RE);
-  if (!match) return null;
-
-  const month = Number(match[1]);
-  const day = Number(match[2]);
-  const weekdayHint = match[3] ?? match[4];
-  const year = resolveYearForMonthDay(month, day, weekdayHint);
-  const date = new Date(year, month - 1, day);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
 function parseSlashDate(value: string): Date | null {
   const match = value.trim().match(SLASH_DATE_RE);
   if (!match) return null;
@@ -125,7 +111,6 @@ function parseDateFromText(value: string): Date | null {
   return (
     parseGvizDate(trimmed) ??
     parseIsoLikeDate(trimmed) ??
-    parseShortDotDate(trimmed) ??
     parseKoreanDate(trimmed) ??
     parseSlashDate(trimmed) ??
     parseSheetSerial(trimmed) ??
@@ -190,25 +175,10 @@ function formatTimeFromDate(date: Date): string | null {
   return `${meridiem}${hour12}시`;
 }
 
-/** 수업 시간 중 진행(고정 마감 없음) — 목록 하단 배치 */
-export function isClassTimeDeadline(raw: string): boolean {
-  return /수업\s*시간/.test(raw.trim());
-}
-
-/** 정렬·표시용 날짜 파싱 */
-export function parseDeadlineDate(raw: string): Date | null {
-  const trimmed = raw.trim();
-  if (!trimmed || isClassTimeDeadline(trimmed)) return null;
-
-  const { dateText } = splitDateAndSuffix(trimmed);
-  return parseDateFromText(dateText || trimmed);
-}
-
 /** 마감 일시: 날짜는 `5월29일(목)`, 교시·시간이 있으면 뒤에 붙임 */
 export function formatDeadline(raw: string): string {
   const trimmed = raw.trim();
   if (!trimmed) return "";
-  if (isClassTimeDeadline(trimmed)) return trimmed;
 
   const { dateText, timeSuffix } = splitDateAndSuffix(trimmed);
   const parsed = parseDateFromText(dateText || trimmed);

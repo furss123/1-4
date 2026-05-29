@@ -1,8 +1,7 @@
 import type { ProgressStatus, SubjectFilter } from "@/types/assessment";
 
 export const SCHOOL_NAME = "남악고등학교";
-export const APP_CLASS_BADGE = "1학년 4반";
-export const APP_CLASS_LABEL = `${SCHOOL_NAME} ${APP_CLASS_BADGE}`;
+export const APP_CLASS_LABEL = "남악고등학교 1학년 4반";
 export const APP_TITLE = "수행평가 안내";
 export const APP_SUBTITLE = "Written by 윤서현";
 
@@ -38,6 +37,18 @@ export const STATUS_STYLES: Record<
     bg: "bg-slate-100",
     text: "text-slate-600",
   },
+};
+
+export const PADLET_BOARD = {
+  label: "1학년 4반 패들렛",
+  href: "https://padlet.com/furss13/2026namak1_4",
+  helper: "반 게시판·공지·자료를 확인하세요.",
+} as const;
+
+export const INQUIRY_CONTACT = {
+  label: "문의하기",
+  href: "tel:",
+  helper: "담임 선생님께 문의",
 };
 
 export const ANNOUNCEMENT = {

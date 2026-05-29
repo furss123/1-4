@@ -74,22 +74,15 @@ export function IconMegaphone({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
-export function IconMeal({ className = "h-5 w-5" }: IconProps) {
+/** Padlet-style bulletin board (color tiles) */
+export function IconPadlet({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d="M4 3h16" />
-      <path d="M6 3v7c0 2.2 1.8 4 4 4h4c2.2 0 4-1.8 4-4V3" />
-      <path d="M8 21h8" />
-      <path d="M12 14v7" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <rect x="2.5" y="3" width="19" height="18" rx="2.5" fill="currentColor" fillOpacity="0.1" />
+      <rect x="4.5" y="5" width="6.5" height="5" rx="1.25" fill="#F472B6" />
+      <rect x="12.5" y="5" width="7" height="7.5" rx="1.25" fill="#38BDF8" />
+      <rect x="4.5" y="11.5" width="9" height="5.5" rx="1.25" fill="#FBBF24" />
+      <rect x="14.5" y="14" width="5" height="3" rx="1" fill="#4ADE80" />
     </svg>
   );
 }

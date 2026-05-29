@@ -19,7 +19,7 @@ function Field({
     <div>
       <dt className="text-[11px] font-bold text-ink-subtle">{label}</dt>
       <dd
-        className={`mt-px text-[13px] leading-snug ${
+        className={`mt-0.5 text-sm leading-relaxed ${
           highlight ? "font-numeric font-semibold text-primary" : "font-medium text-ink-muted"
         }`}
       >
@@ -35,13 +35,13 @@ export function AssessmentTable({ assessments }: AssessmentTableProps) {
       {assessments.map((row) => (
         <article
           key={row.id}
-          className="rounded-card border border-border/50 bg-card px-3.5 py-2.5 shadow-card"
+          className="rounded-card border border-border/50 bg-card p-4 shadow-card"
         >
-          <p className="text-[13px] font-bold leading-tight text-school">{row.subject}</p>
+          <p className="text-sm font-bold text-school">{row.subject}</p>
 
-          <h3 className="mt-1 text-[15px] font-bold leading-tight text-ink">{row.name}</h3>
+          <h3 className="mt-3 text-base font-bold leading-snug text-ink">{row.name}</h3>
 
-          <dl className="mt-2 space-y-1.5 border-t border-border/60 pt-2">
+          <dl className="mt-4 space-y-3 border-t border-border/60 pt-3">
             <Field label="마감 일시" highlight>
               {formatDeadline(row.deadline) || "—"}
             </Field>
