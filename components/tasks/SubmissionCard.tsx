@@ -1,4 +1,5 @@
 import type { Assessment } from "@/types/assessment";
+import { formatDeadline } from "@/lib/format-deadline";
 
 type SubmissionCardProps = {
   assessment: Assessment;
@@ -15,7 +16,9 @@ export function SubmissionCard({ assessment }: SubmissionCardProps) {
           {assessment.submissionMethod || "—"}
         </p>
       </div>
-      <p className="font-numeric mt-2 text-xs text-ink-muted">마감: {assessment.deadline}</p>
+      <p className="font-numeric mt-2 text-xs text-ink-muted">
+        마감: {formatDeadline(assessment.deadline) || "—"}
+      </p>
     </article>
   );
 }

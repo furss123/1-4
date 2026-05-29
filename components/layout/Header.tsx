@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { HeaderIllustration } from "@/components/icons";
-import { APP_SUBTITLE, APP_TITLE, SCHOOL_NAME } from "@/lib/constants";
+import { APP_CLASS_LABEL, APP_SUBTITLE, APP_TITLE, SCHOOL_NAME } from "@/lib/constants";
 import { publicAsset } from "@/lib/asset";
 
 export function Header() {
@@ -18,24 +17,14 @@ export function Header() {
           priority
           unoptimized
         />
-        <div className="min-w-0">
-          <p className="text-lg font-bold leading-tight text-school">{SCHOOL_NAME}</p>
-          <p className="mt-0.5 text-xs font-medium text-ink-muted">1학년 4반</p>
-        </div>
+        <p className="min-w-0 text-lg font-bold leading-snug text-school">{APP_CLASS_LABEL}</p>
       </div>
 
-      <div className="relative px-4 pb-6 pt-1">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0 flex-1">
-            <h1 className="text-[1.75rem] font-bold leading-tight tracking-tight text-school">
-              {APP_TITLE}
-            </h1>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-ink-muted">
-              {APP_SUBTITLE}
-            </p>
-          </div>
-          <HeaderIllustration className="h-[5.25rem] w-[5.25rem] shrink-0 drop-shadow-sm" />
-        </div>
+      <div className="px-4 pb-6 pt-1">
+        <h1 className="text-[1.75rem] font-bold leading-tight tracking-tight text-school">
+          {APP_TITLE}
+        </h1>
+        <p className="mt-2 text-sm font-medium leading-relaxed text-ink-muted">{APP_SUBTITLE}</p>
       </div>
     </header>
   );

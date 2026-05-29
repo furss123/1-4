@@ -1,4 +1,5 @@
 import type { Assessment } from "@/types/assessment";
+import { formatDeadline } from "@/lib/format-deadline";
 import { StatusBadge } from "./StatusBadge";
 
 type TaskCardProps = {
@@ -30,7 +31,7 @@ export function TaskCard({ assessment, emphasizeDeadline = false }: TaskCardProp
           마감 일시
         </p>
         <p className="font-numeric mt-1 text-[1.35rem] font-semibold leading-tight text-primary">
-          {assessment.deadline || "—"}
+          {formatDeadline(assessment.deadline) || "—"}
         </p>
       </div>
 

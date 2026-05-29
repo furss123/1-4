@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Assessment } from "@/types/assessment";
+import { formatDeadline } from "@/lib/format-deadline";
 
 type AssessmentTableProps = {
   assessments: Assessment[];
@@ -36,18 +37,13 @@ export function AssessmentTable({ assessments }: AssessmentTableProps) {
           key={row.id}
           className="rounded-card border border-border/50 bg-card p-4 shadow-card"
         >
-          <div className="flex items-center gap-2.5">
-            <span className="font-numeric inline-flex h-8 min-w-8 shrink-0 items-center justify-center rounded-full bg-primary-light px-2 text-sm font-bold text-primary">
-              {row.id}
-            </span>
-            <span className="text-sm font-bold text-school">{row.subject}</span>
-          </div>
+          <p className="text-sm font-bold text-school">{row.subject}</p>
 
           <h3 className="mt-3 text-base font-bold leading-snug text-ink">{row.name}</h3>
 
           <dl className="mt-4 space-y-3 border-t border-border/60 pt-3">
             <Field label="마감 일시" highlight>
-              {row.deadline || "—"}
+              {formatDeadline(row.deadline) || "—"}
             </Field>
             <Field label="제출 방법">{row.submissionMethod || "—"}</Field>
             {row.precautions ? <Field label="유의사항">{row.precautions}</Field> : null}

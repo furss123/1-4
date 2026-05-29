@@ -147,31 +147,3 @@ export function IconUser({ className = "h-5 w-5" }: IconProps) {
     </svg>
   );
 }
-
-export function HeaderIllustration({ className = "h-24 w-24" }: IconProps) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 96 96"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <rect x="18" y="14" width="52" height="64" rx="10" fill="#EFF6FF" stroke="#2D68D7" strokeWidth="2" />
-      <path d="M30 30h32M30 42h22M30 54h28" stroke="#93C5FD" strokeWidth="2.5" strokeLinecap="round" />
-      <path
-        d="M62 62l16 12-16 8V62z"
-        fill="#2D68D7"
-        stroke="#1A3088"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M48 8l4 6 6-1-2 8 3-5 5 4-6-2-4 6-6-3z"
-        fill="#FCD34D"
-        stroke="#F59E0B"
-        strokeWidth="0.5"
-      />
-    </svg>
-  );
-}

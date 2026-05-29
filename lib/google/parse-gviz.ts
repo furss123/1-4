@@ -8,13 +8,17 @@ export function parseGvizRows(payload: string): string[][] {
   }
 
   const data = JSON.parse(match[1]) as {
-    table?: { rows?: { c?: { v?: string | number | null }[] }[] };
+    table?: { rows?: { c?: { v?: string | number | null; f?: string | null }[] }[] };
   };
 
   const tableRows = data.table?.rows ?? [];
 
   return tableRows.map((row) =>
     (row.c ?? []).map((cell) => {
+      const formatted = cell?.f;
+      if (formatted != null && String(formatted).trim() !== "") {
+        return String(formatted).trim();
+      }
       const value = cell?.v;
       return value == null ? "" : String(value);
     }),
