@@ -35,3 +35,55 @@ h3 {
   font-family: SUIT, Pretendard, system-ui, sans-serif;
   font-weight: 600;
 }
+
+@keyframes author-shimmer {
+  0% {
+    background-position: 120% center;
+  }
+  100% {
+    background-position: -120% center;
+  }
+}
+
+@keyframes author-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 1px 2px rgba(224, 122, 154, 0.12),
+      0 0 0 1px rgba(245, 198, 214, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 2px 10px rgba(245, 168, 192, 0.45),
+      0 0 14px rgba(255, 210, 224, 0.55),
+      0 0 0 1px rgba(245, 198, 214, 0.9);
+  }
+}
+
+.author-sparkle {
+  color: #e07a9a;
+  background-image: linear-gradient(
+    110deg,
+    #d4567a 0%,
+    #e07a9a 32%,
+    #ffd4e4 50%,
+    #e07a9a 68%,
+    #d4567a 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation:
+    author-shimmer 3.2s ease-in-out infinite,
+    author-glow 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .author-sparkle {
+    -webkit-text-fill-color: #e07a9a;
+    background-image: none;
+    animation: none;
+    box-shadow: 0 1px 2px rgba(224, 122, 154, 0.12);
+  }
+}
