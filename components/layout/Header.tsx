@@ -12,20 +12,20 @@ export function Header() {
 
   return (
     <header className="border-b border-border/50 bg-hero-gradient px-4 pb-4 pt-3.5">
-      <div className="flex items-stretch gap-3">
-        <div className="relative aspect-square h-full min-h-14 shrink-0 self-stretch">
+      <div className="grid grid-cols-[auto_1fr] items-center gap-x-3">
+        <div className="relative col-start-1 row-start-1 aspect-square h-[calc(100%+2mm)] w-[calc(100%+2mm)] min-h-[calc(3.5rem+2mm)] shrink-0 place-self-center">
           <Image
             src={logoSrc}
             alt={`${SCHOOL_NAME} 로고`}
             fill
-            sizes="96px"
+            sizes="104px"
             className="rounded-full object-cover shadow-sm ring-2 ring-white"
             priority
             unoptimized
           />
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col justify-center">
+        <div className="col-start-2 row-start-1 min-w-0">
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-[13px] font-bold text-school">{SCHOOL_NAME}</span>
             <span
