@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/home/AppShell";
+import { PageFrame } from "@/components/layout/PageFrame";
 import { DataErrorBanner } from "@/components/sections/DataErrorBanner";
-import { Header } from "@/components/layout/Header";
 import { fetchPublicSheetAssessmentsClient } from "@/lib/google/public-sheet-client";
 import type { Assessment } from "@/types/assessment";
 
@@ -31,38 +31,29 @@ export function HomePageContent() {
 
   if (error) {
     return (
-      <>
-        <Header />
-        <main className="space-y-4 px-0 pb-10">
-          <div className="px-4">
-            <DataErrorBanner message={error} />
-          </div>
-        </main>
-      </>
+      <PageFrame mainClassName="space-y-4 px-0 pb-4">
+        <div className="px-4">
+          <DataErrorBanner message={error} />
+        </div>
+      </PageFrame>
     );
   }
 
   if (assessments === null) {
     return (
-      <>
-        <Header />
-        <main className="flex min-h-[50vh] items-center justify-center px-4">
-          <p className="text-sm font-medium text-ink-muted">수행평가 일정을 불러오는 중…</p>
-        </main>
-      </>
+      <PageFrame mainClassName="flex items-center justify-center px-4 pb-4">
+        <p className="text-sm font-medium text-ink-muted">수행평가 일정을 불러오는 중…</p>
+      </PageFrame>
     );
   }
 
   if (assessments.length === 0) {
     return (
-      <>
-        <Header />
-        <main className="space-y-4 pb-10">
-          <p className="mx-4 rounded-card bg-card px-4 py-12 text-center text-sm font-medium text-ink-muted shadow-soft">
-            진행 중·마감 임박 수행평가가 없습니다.
-          </p>
-        </main>
-      </>
+      <PageFrame mainClassName="space-y-4 pb-4">
+        <p className="mx-4 rounded-card bg-card px-4 py-12 text-center text-sm font-medium text-ink-muted shadow-soft">
+          진행 중·마감 임박 수행평가가 없습니다.
+        </p>
+      </PageFrame>
     );
   }
 

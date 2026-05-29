@@ -1,11 +1,5 @@
 import Image from "next/image";
-import {
-  APP_AUTHOR,
-  APP_AUTHOR_LABEL,
-  APP_CLASS_LABEL,
-  APP_TITLE,
-  SCHOOL_NAME,
-} from "@/lib/constants";
+import { APP_CLASS_LABEL, APP_TITLE, SCHOOL_NAME } from "@/lib/constants";
 import { publicAsset } from "@/lib/asset";
 
 export function Header() {
@@ -23,22 +17,11 @@ export function Header() {
           priority
           unoptimized
         />
-        <div className="flex min-w-0 flex-1 flex-col justify-center">
-          <p className="text-base font-bold leading-snug text-school">{APP_CLASS_LABEL}</p>
-          <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
-            <h1 className="text-[1.5rem] font-bold leading-tight tracking-tight text-school">
-              {APP_TITLE}
-            </h1>
-            <span className="inline-flex items-center gap-1.5 leading-none">
-              <span className="text-xs font-medium text-ink-muted">{APP_AUTHOR_LABEL}</span>
-              <span
-                className="rounded-md bg-white px-2 py-0.5 text-sm font-bold tracking-wide text-[#E07A9A] shadow-sm ring-1 ring-[#F5C6D6]/80"
-                aria-label={APP_AUTHOR}
-              >
-                {APP_AUTHOR}
-              </span>
-            </span>
-          </div>
+        <div className="flex h-[4.5rem] min-w-0 flex-1 flex-col justify-center gap-[2pt]">
+          <p className="text-[1.5625rem] font-bold leading-none text-school">{APP_CLASS_LABEL}</p>
+          <h1 className="text-[2.75rem] font-bold leading-none tracking-tight text-school">
+            {APP_TITLE}
+          </h1>
         </div>
       </div>
     </header>
