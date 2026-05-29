@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { PadletFloatingLink } from "@/components/layout/PadletFloatingLink";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,8 +31,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full">
-        <div className="mx-auto min-h-full max-w-app bg-surface font-sans text-ink antialiased">
+        <div className="relative mx-auto min-h-full max-w-app bg-surface font-sans text-ink antialiased">
           {children}
+          <PadletFloatingLink />
         </div>
       </body>
     </html>
