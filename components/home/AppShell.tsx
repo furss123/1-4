@@ -1,6 +1,5 @@
 import { Header } from "@/components/layout/Header";
 import { RoadmapView } from "@/components/home/RoadmapView";
-import { FooterInfoCards } from "@/components/sections/FooterInfoCards";
 import type { Assessment } from "@/types/assessment";
 
 type AppShellProps = {
@@ -14,7 +13,6 @@ export function AppShell({ assessments }: AppShellProps) {
 
       <main className="space-y-3 pb-4">
         <RoadmapView assessments={assessments} />
-        <FooterInfoCards />
       </main>
     </div>
   );

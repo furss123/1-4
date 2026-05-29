@@ -74,15 +74,35 @@ export function IconMegaphone({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
-/** Padlet-style bulletin board (color tiles) */
+/** Padlet board (white tile + color blocks) */
 export function IconPadlet({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="2.5" y="3" width="19" height="18" rx="2.5" fill="currentColor" fillOpacity="0.1" />
-      <rect x="4.5" y="5" width="6.5" height="5" rx="1.25" fill="#F472B6" />
-      <rect x="12.5" y="5" width="7" height="7.5" rx="1.25" fill="#38BDF8" />
-      <rect x="4.5" y="11.5" width="9" height="5.5" rx="1.25" fill="#FBBF24" />
-      <rect x="14.5" y="14" width="5" height="3" rx="1" fill="#4ADE80" />
+      <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0" strokeWidth="1" />
+      <rect x="4.5" y="4.5" width="15" height="15" rx="2.5" fill="#F1F5F9" />
+      <rect x="5.5" y="5.5" width="5.5" height="4.5" rx="1" fill="#F472B6" />
+      <rect x="12" y="5.5" width="6.5" height="6" rx="1" fill="#38BDF8" />
+      <rect x="5.5" y="10.5" width="7.5" height="4.5" rx="1" fill="#FBBF24" />
+      <rect x="13.5" y="12.5" width="5" height="2.5" rx="0.75" fill="#4ADE80" />
+    </svg>
+  );
+}
+
+/** Small external-link / shortcut badge */
+export function IconShortcutArrow({ className = "h-3 w-3" }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 12 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M4.5 7.5 7.5 4.5" />
+      <path d="M4.5 4.5h3v3" />
     </svg>
   );
 }

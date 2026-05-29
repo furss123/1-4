@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { AppShell } from "@/components/home/AppShell";
 import { DataErrorBanner } from "@/components/sections/DataErrorBanner";
 import { Header } from "@/components/layout/Header";
-import { FooterInfoCards } from "@/components/sections/FooterInfoCards";
 import { fetchPublicSheetAssessmentsClient } from "@/lib/google/public-sheet-client";
 import type { Assessment } from "@/types/assessment";
 
@@ -38,7 +37,6 @@ export function HomePageContent() {
           <div className="px-4">
             <DataErrorBanner message={error} />
           </div>
-          <FooterInfoCards />
         </main>
       </>
     );
@@ -63,7 +61,6 @@ export function HomePageContent() {
           <p className="mx-4 rounded-card bg-card px-4 py-12 text-center text-sm font-medium text-ink-muted shadow-soft">
             진행 중·마감 임박 수행평가가 없습니다.
           </p>
-          <FooterInfoCards />
         </main>
       </>
     );
