@@ -1,4 +1,5 @@
 import type { Assessment } from "@/types/assessment";
+import { sortAssessmentsByDeadline } from "@/lib/sort-assessments";
 import { normalizeProgressStatus } from "@/lib/utils";
 
 export function parseGvizRows(payload: string): string[][] {
@@ -43,12 +44,7 @@ export function parseAssessmentRow(row: string[], rowIndex: number): Assessment 
 }
 
 export function sortAssessments(items: Assessment[]): Assessment[] {
-  return [...items].sort((a, b) => {
-    const numA = Number.parseInt(a.id, 10);
-    const numB = Number.parseInt(b.id, 10);
-    if (!Number.isNaN(numA) && !Number.isNaN(numB)) return numA - numB;
-    return a.id.localeCompare(b.id, "ko");
-  });
+  return sortAssessmentsByDeadline(items);
 }
 
 export function rowsToAssessments(rows: string[][]): Assessment[] {

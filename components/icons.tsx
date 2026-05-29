@@ -74,6 +74,26 @@ export function IconMegaphone({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
+export function IconMeal({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M4 3h16" />
+      <path d="M6 3v7c0 2.2 1.8 4 4 4h4c2.2 0 4-1.8 4-4V3" />
+      <path d="M8 21h8" />
+      <path d="M12 14v7" />
+    </svg>
+  );
+}
+
 export function IconQuestion({ className = "h-5 w-5" }: IconProps) {
   return (
     <svg

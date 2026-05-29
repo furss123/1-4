@@ -39,12 +39,6 @@ export const STATUS_STYLES: Record<
   },
 };
 
-export const INQUIRY_CONTACT = {
-  label: "문의하기",
-  href: "tel:",
-  helper: "담임 선생님께 문의",
-};
-
 export const ANNOUNCEMENT = {
   title: "마감 일시 기준",
   caption: "(월/일(요일) 시간 및 교시) 기준으로 안내됩니다.",
