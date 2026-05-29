@@ -71,19 +71,17 @@ export function TodayMealCard() {
   return (
     <section className="px-4 pb-2" aria-label="오늘의 급식">
       <div className="overflow-hidden rounded-card border border-border/50 bg-card shadow-card">
-        <div className="border-b border-border/60 bg-primary-light/40 px-4 py-3.5">
-          <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-primary shadow-soft">
-              <IconMeal className="h-5 w-5" />
+        <div className="border-b border-border/60 bg-primary-light/40 px-4 py-1.5">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-primary shadow-soft">
+              <IconMeal className="h-4 w-4" />
             </span>
-            <div className="min-w-0">
-              <h2 className="flex flex-wrap items-baseline gap-x-1.5 text-sm font-bold leading-snug text-school">
-                <span>오늘의 급식</span>
-                <span className="font-numeric text-xs font-semibold text-ink-muted">
-                  {meals?.dateLabel ?? "불러오는 중…"}
-                </span>
-              </h2>
-            </div>
+            <h2 className="flex min-w-0 flex-1 flex-wrap items-center gap-x-1.5 text-base font-bold leading-none text-school">
+              <span>오늘의 급식</span>
+              <span className="font-numeric text-sm font-semibold leading-none text-ink-muted">
+                {meals?.dateLabel ?? "불러오는 중…"}
+              </span>
+            </h2>
           </div>
         </div>
 

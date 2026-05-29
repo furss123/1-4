@@ -13,12 +13,12 @@ export function Header() {
   return (
     <header className="border-b border-border/50 bg-hero-gradient px-4 pb-4 pt-3.5">
       <div className="grid grid-cols-[auto_1fr] items-center gap-x-3">
-        <div className="relative col-start-1 row-start-1 aspect-square h-[calc(100%+2mm)] w-[calc(100%+2mm)] min-h-[calc(3.5rem+2mm)] shrink-0 place-self-center">
+        <div className="relative col-start-1 row-start-1 aspect-square h-full w-full min-h-14 shrink-0 place-self-center">
           <Image
             src={logoSrc}
             alt={`${SCHOOL_NAME} 로고`}
             fill
-            sizes="104px"
+            sizes="96px"
             className="rounded-full object-cover shadow-sm ring-2 ring-white"
             priority
             unoptimized
