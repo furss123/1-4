@@ -9,7 +9,7 @@ import {
 import { publicAsset } from "@/lib/asset";
 
 export function Header() {
-  const logoSrc = publicAsset("/logo-namak.png");
+  const logoSrc = publicAsset("/logo-namak-transparent.png");
 
   return (
     <header className="bg-hero-gradient px-4 pb-[4mm] pt-4">
@@ -19,7 +19,7 @@ export function Header() {
           alt={`${SCHOOL_NAME} 로고`}
           width={72}
           height={72}
-          className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-full object-cover shadow-card ring-[3px] ring-white"
+          className="h-[4.5rem] w-[4.5rem] shrink-0 object-contain drop-shadow-sm"
           priority
           unoptimized
         />
@@ -32,7 +32,7 @@ export function Header() {
             <span className="inline-flex items-center gap-1.5 leading-none">
               <span className="text-xs font-medium text-ink-muted">{APP_AUTHOR_LABEL}</span>
               <span
-                className="rounded-md bg-white px-2 py-0.5 text-sm font-bold tracking-wide text-school shadow-sm ring-1 ring-primary/25"
+                className="rounded-md bg-white px-2 py-0.5 text-sm font-bold tracking-wide text-[#E07A9A] shadow-sm ring-1 ring-[#F5C6D6]/80"
                 aria-label={APP_AUTHOR}
               >
                 {APP_AUTHOR}

@@ -1,9 +1,22 @@
 import type { Metadata, Viewport } from "next";
+import { SITE_ICONS } from "@/lib/site-icons";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "남악고등학교 수행평가 안내",
   description: "1학년 1학기 수행평가 일정·제출 방법·진행 상황 안내",
+  manifest: SITE_ICONS.manifest,
+  icons: {
+    icon: [
+      { url: SITE_ICONS.favicon, sizes: "any" },
+      { url: SITE_ICONS.favicon32, sizes: "32x32", type: "image/png" },
+      { url: SITE_ICONS.pwa192, sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: SITE_ICONS.apple, sizes: "180x180", type: "image/png" }],
+  },
+  appleWebApp: {
+    title: "수행평가 안내",
+  },
 };
 
 export const viewport: Viewport = {
