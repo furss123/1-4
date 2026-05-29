@@ -3,7 +3,9 @@ import type { ProgressStatus, SubjectFilter } from "@/types/assessment";
 export const SCHOOL_NAME = "남악고등학교";
 export const APP_CLASS_LABEL = "남악고등학교 1학년 4반";
 export const APP_TITLE = "수행평가 안내";
-export const APP_SUBTITLE = "Written by 윤서현";
+export const APP_AUTHOR_LABEL = "Written by";
+export const APP_AUTHOR = "PerfectYoon";
+export const APP_SUBTITLE = `${APP_AUTHOR_LABEL} ${APP_AUTHOR}`;
 
 export const SUBJECT_FILTERS: readonly SubjectFilter[] = [
   "전체",

@@ -1,8 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import {
-  PADLET_RAIL_WIDTH,
-  PadletFloatingLink,
-} from "@/components/layout/PadletFloatingLink";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,12 +30,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full">
-        <div
-          className="relative mx-auto min-h-full max-w-app bg-surface font-sans text-ink antialiased"
-          style={{ ["--padlet-rail" as string]: PADLET_RAIL_WIDTH }}
-        >
-          <div className="min-h-full pr-[var(--padlet-rail)]">{children}</div>
-          <PadletFloatingLink />
+        <div className="mx-auto min-h-full max-w-app bg-surface font-sans text-ink antialiased">
+          {children}
         </div>
       </body>
     </html>
