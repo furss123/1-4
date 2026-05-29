@@ -35,7 +35,7 @@ export function AssessmentTable({ assessments }: AssessmentTableProps) {
       {assessments.map((row) => (
         <article
           key={row.id}
-          className="rounded-card border border-border/50 bg-card p-4 shadow-card"
+          className="rounded-card border border-border/50 bg-card px-4 py-[calc(1rem-3mm)] shadow-card"
         >
           <p className="text-sm font-bold text-school">{row.subject}</p>
 
