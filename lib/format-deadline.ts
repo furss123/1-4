@@ -4,8 +4,8 @@ const GVIZ_DATE_RE = /^Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+)(?:,(\d+))?)?\)$/;
 const KOREAN_DATE_RE =
   /(?:(\d{4})[.\-/년\s]*)?(\d{1,2})\s*월\s*(\d{1,2})\s*일(?:\s*\(([일월화수목금토])\))?/;
 const SLASH_DATE_RE = /^(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/;
-const TIME_SUFFIX_RE =
-  /(?:\s|,|·)*((?:\d{1,2}교시)|(?:오전|오후)\s*\d{1,2}(?::\d{2})?\s*시(?:\s*\d{1,2}\s*분)?|\d{1,2}:\d{2}(?::\d{2})?)\s*$/i;
+const PERIOD_RE = /(?:제)?(\d{1,2})\s*교시/;
+const HOUR_RE = /(?:오전|오후)\s*(\d{1,2})\s*시|(?<![월일\d])(\d{1,2})\s*시(?!\s*간)|(\d{1,2}):(\d{2})/;
 
 function formatDatePart(date: Date): string {
   const month = date.getMonth() + 1;
@@ -80,9 +80,7 @@ function parseKoreanDate(value: string): Date | null {
   const month = Number(match[2]);
   const day = Number(match[3]);
   const weekdayHint = match[4];
-  const year = match[1]
-    ? Number(match[1])
-    : resolveYearForMonthDay(month, day, weekdayHint);
+  const year = match[1] ? Number(match[1]) : resolveYearForMonthDay(month, day, weekdayHint);
   const date = new Date(year, month - 1, day);
   return Number.isNaN(date.getTime()) ? null : date;
 }
@@ -121,83 +119,78 @@ function parseDateFromText(value: string): Date | null {
   );
 }
 
-function splitDateAndSuffix(raw: string): { dateText: string; timeSuffix: string | null } {
-  const trimmed = raw.trim();
-  const timeMatch = trimmed.match(TIME_SUFFIX_RE);
-  if (!timeMatch) {
-    return { dateText: trimmed, timeSuffix: null };
-  }
-
-  return {
-    dateText: trimmed.slice(0, timeMatch.index).trim(),
-    timeSuffix: timeMatch[1].trim(),
-  };
+/** Strip 교시·시각·까지 so only the date portion remains for parsing */
+function stripTimeTokens(value: string): string {
+  return value
+    .replace(PERIOD_RE, "")
+    .replace(/(?:오전|오후)\s*\d{1,2}\s*시(?:\s*\d{1,2}\s*분)?/g, "")
+    .replace(/(?<![월일\d])\d{1,2}\s*시(?!\s*간)/g, "")
+    .replace(/\d{1,2}:\d{2}(?::\d{2})?/g, "")
+    .replace(/까지/g, "")
+    .replace(/[,\s·]+/g, " ")
+    .trim();
 }
 
-function normalizePeriodSuffix(suffix: string): string {
-  const trimmed = suffix.trim();
-
-  const period = trimmed.match(/^(\d{1,2})교시$/);
-  if (period) return `${Number(period[1])}교시`;
-
-  const ampm = trimmed.match(/^(오전|오후)\s*(\d{1,2})(?::(\d{2}))?\s*시(?:\s*(\d{1,2})\s*분)?$/i);
-  if (ampm) {
-    const meridiem = ampm[1] === "오후" ? "오후" : "오전";
-    const hour = Number(ampm[2]);
-    const minute = ampm[3] != null ? Number(ampm[3]) : ampm[4] != null ? Number(ampm[4]) : 0;
-    if (minute > 0) return `${meridiem}${hour}시${minute}분`;
-    return `${meridiem}${hour}시`;
-  }
-
-  const clock = trimmed.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
-  if (clock) {
-    const hour = Number(clock[1]);
-    const minute = Number(clock[2]);
-    const meridiem = hour < 12 ? "오전" : "오후";
-    const hour12 = hour % 12 === 0 ? 12 : hour % 12;
-    if (minute > 0) return `${meridiem}${hour12}시${minute}분`;
-    return `${meridiem}${hour12}시`;
-  }
-
-  return trimmed.replace(/\s+/g, "");
+function extractPeriod(value: string): string | null {
+  const match = value.match(PERIOD_RE);
+  if (!match) return null;
+  return `${Number(match[1])}교시`;
 }
 
-function formatTimeFromDate(date: Date): string | null {
+/** 시각이 있으면 `10시` 형태만 반환 (오전/오후·분 제외) */
+function extractHourOnly(value: string): string | null {
+  if (/수업\s*시간|수업시간/i.test(value)) return null;
+
+  const match = value.match(HOUR_RE);
+  if (!match) return null;
+
+  const hour = Number(match[1] ?? match[2] ?? match[3]);
+  if (!Number.isFinite(hour) || hour < 0 || hour > 23) return null;
+  return `${hour}시`;
+}
+
+function formatHourFromDate(date: Date): string | null {
   const hour = date.getHours();
   const minute = date.getMinutes();
   const second = date.getSeconds();
 
   if (hour === 0 && minute === 0 && second === 0) return null;
-
-  const meridiem = hour < 12 ? "오전" : "오후";
-  const hour12 = hour % 12 === 0 ? 12 : hour % 12;
-  if (minute > 0) return `${meridiem}${hour12}시${minute}분`;
-  return `${meridiem}${hour12}시`;
+  return `${hour}시`;
 }
 
-/** 마감 일시: 날짜는 `5월29일(목)`, 교시·시간이 있으면 뒤에 붙임 */
+/**
+ * 마감 일시 표기
+ * - 기본: `5월29일(목)`
+ * - 교시: `5월29일(목) 3교시`
+ * - 시각: `5월29일(목) 10시` (오전/오후·분 없이 시만)
+ */
 export function formatDeadline(raw: string): string {
   const trimmed = raw.trim();
   if (!trimmed) return "";
 
-  const { dateText, timeSuffix } = splitDateAndSuffix(trimmed);
+  const period = extractPeriod(trimmed);
+  const hourOnly = period ? null : extractHourOnly(trimmed);
+  const dateText = stripTimeTokens(trimmed);
   const parsed = parseDateFromText(dateText || trimmed);
 
   if (!parsed) {
-    if (timeSuffix) {
-      const normalized = normalizePeriodSuffix(timeSuffix);
-      const base = (dateText || trimmed).replace(/\s+/g, "");
-      return base ? `${base} ${normalized}` : normalized;
-    }
     return trimmed;
   }
 
   const datePart = formatDatePart(parsed);
 
-  if (timeSuffix) {
-    return `${datePart} ${normalizePeriodSuffix(timeSuffix)}`;
+  if (period) {
+    return `${datePart} ${period}`;
   }
 
-  const fromDate = formatTimeFromDate(parsed);
-  return fromDate ? `${datePart} ${fromDate}` : datePart;
+  if (hourOnly) {
+    return `${datePart} ${hourOnly}`;
+  }
+
+  const hourFromDate = formatHourFromDate(parsed);
+  if (hourFromDate) {
+    return `${datePart} ${hourFromDate}`;
+  }
+
+  return datePart;
 }

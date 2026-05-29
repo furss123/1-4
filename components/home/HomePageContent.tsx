@@ -33,7 +33,7 @@ export function HomePageContent() {
     return (
       <>
         <Header />
-        <main className="space-y-4 px-0 pt-3 pb-10">
+        <main className="space-y-4 px-0 pb-10">
           <div className="px-4">
             <DataErrorBanner message={error} />
           </div>
@@ -57,7 +57,7 @@ export function HomePageContent() {
     return (
       <>
         <Header />
-        <main className="space-y-4 pt-3 pb-10">
+        <main className="space-y-4 pb-10">
           <p className="mx-4 rounded-card bg-card px-4 py-12 text-center text-sm font-medium text-ink-muted shadow-soft">
             진행 중·마감 임박 수행평가가 없습니다.
           </p>
