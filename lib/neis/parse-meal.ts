@@ -15,21 +15,41 @@ type NeisMealRow = {
   CAL_INFO?: string;
 };
 
-/** NEIS 요리명 문자열 → 메뉴 목록 (알레르기 번호 제외) */
+function stripAllergyMarkers(text: string): string {
+  return text.replace(/\s*\([0-9.]+\)/g, "").trim();
+}
+
+/** NEIS 요리명 문자열 → 메뉴 목록 (알레르기 번호·HTML 줄바꿈 제외) */
 export function parseDishNames(ddishNm: string): string[] {
-  const trimmed = ddishNm.trim();
-  if (!trimmed) return [];
+  const normalized = ddishNm
+    .trim()
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/\r\n/g, "\n");
 
-  const dishes: string[] = [];
-  const re = /([^(]+?)(?:\s*\([0-9.]+\))?\s*/g;
-  let match: RegExpExecArray | null;
+  if (!normalized) return [];
 
-  while ((match = re.exec(trimmed)) !== null) {
-    const name = match[1].trim();
-    if (name) dishes.push(name);
+  if (normalized.includes("\n")) {
+    return normalized
+      .split(/\n+/)
+      .map(stripAllergyMarkers)
+      .filter(Boolean);
   }
 
-  return dishes;
+  const dishes: string[] = [];
+  const withAllergy = /([^(]+?)\s*\([0-9.]+\)/g;
+  let match: RegExpExecArray | null;
+  let lastIndex = 0;
+
+  while ((match = withAllergy.exec(normalized)) !== null) {
+    const name = match[1].trim();
+    if (name) dishes.push(name);
+    lastIndex = withAllergy.lastIndex;
+  }
+
+  const tail = stripAllergyMarkers(normalized.slice(lastIndex));
+  if (tail) dishes.push(tail);
+
+  return dishes.filter(Boolean);
 }
 
 function formatKoreaDateLabel(ymd: string): string {

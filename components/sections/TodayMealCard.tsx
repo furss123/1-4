@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { IconMeal } from "@/components/icons";
 import { fetchTodayMealsClient } from "@/lib/neis/fetch-meals-client";
 import type { TodayMeals } from "@/lib/neis/parse-meal";
-import { SCHOOL_NAME } from "@/lib/constants";
 
 function MealColumn({
   label,
@@ -30,9 +29,9 @@ function MealColumn({
 
       {hasMenu ? (
         <ul className="mt-2.5 space-y-1.5">
-          {dishes.map((dish) => (
+          {dishes.map((dish, index) => (
             <li
-              key={dish}
+              key={`${dish}-${index}`}
               className="flex gap-2 text-[13px] font-medium leading-snug text-ink-muted"
             >
               <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-primary/70" />
@@ -78,10 +77,12 @@ export function TodayMealCard() {
               <IconMeal className="h-5 w-5" />
             </span>
             <div className="min-w-0">
-              <h2 className="text-sm font-bold text-school">{SCHOOL_NAME} 오늘의 급식</h2>
-              <p className="font-numeric mt-0.5 text-xs font-semibold text-ink-muted">
-                {meals?.dateLabel ?? "불러오는 중…"}
-              </p>
+              <h2 className="flex flex-wrap items-baseline gap-x-1.5 text-sm font-bold leading-snug text-school">
+                <span>오늘의 급식</span>
+                <span className="font-numeric text-xs font-semibold text-ink-muted">
+                  {meals?.dateLabel ?? "불러오는 중…"}
+                </span>
+              </h2>
             </div>
           </div>
         </div>

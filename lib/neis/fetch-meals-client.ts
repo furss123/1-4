@@ -39,6 +39,7 @@ export async function fetchTodayMealsClient(): Promise<TodayMeals> {
     throw new Error(message);
   }
 
-  const rows = data.mealServiceDietInfo?.[1]?.row ?? [];
+  const rawRows = data.mealServiceDietInfo?.[1]?.row;
+  const rows = rawRows == null ? [] : Array.isArray(rawRows) ? rawRows : [rawRows];
   return rowsToTodayMeals(rows, ymd);
 }
