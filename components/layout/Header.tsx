@@ -18,10 +18,10 @@ export function Header() {
           unoptimized
         />
         <div className="flex h-[4.5rem] min-w-0 flex-1 flex-col justify-center gap-[2pt]">
-          <p className="text-[calc(1.5625rem-2pt)] font-bold leading-none text-school">
+          <p className="text-[calc(1.5625rem-4pt)] font-bold leading-none text-school">
             {APP_CLASS_LABEL}
           </p>
-          <h1 className="text-[calc(2.75rem-2pt)] font-bold leading-none tracking-tight text-school">
+          <h1 className="text-[calc(2.75rem-4pt)] font-bold leading-none tracking-tight text-school">
             {APP_TITLE}
           </h1>
         </div>
