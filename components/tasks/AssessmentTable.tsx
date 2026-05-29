@@ -39,9 +39,9 @@ export function AssessmentTable({ assessments }: AssessmentTableProps) {
         >
           <p className="text-sm font-bold text-school">{row.subject}</p>
 
-          <h3 className="mt-3 text-base font-bold leading-snug text-ink">{row.name}</h3>
+          <h3 className="mt-[3mm] text-base font-bold leading-snug text-ink">{row.name}</h3>
 
-          <dl className="mt-4 space-y-3 border-t border-border/60 pt-3">
+          <dl className="mt-[3mm] space-y-2 border-t border-border/60 pt-[3mm]">
             <Field label="마감 일시" highlight>
               {formatDeadline(row.deadline) || "—"}
             </Field>
