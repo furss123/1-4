@@ -6,8 +6,8 @@ export function Header() {
   const logoSrc = publicAsset("/logo-namak.png");
 
   return (
-    <header className="bg-hero-gradient">
-      <div className="flex items-center gap-3 px-4 pb-3 pt-4">
+    <header className="bg-hero-gradient px-4 pb-6 pt-4">
+      <div className="flex items-center gap-3">
         <Image
           src={logoSrc}
           alt={`${SCHOOL_NAME} 로고`}
@@ -17,14 +17,13 @@ export function Header() {
           priority
           unoptimized
         />
-        <p className="min-w-0 text-lg font-bold leading-snug text-school">{APP_CLASS_LABEL}</p>
-      </div>
-
-      <div className="px-4 pb-6 pt-1">
-        <h1 className="text-[1.75rem] font-bold leading-tight tracking-tight text-school">
-          {APP_TITLE}
-        </h1>
-        <p className="mt-2 text-sm font-medium leading-relaxed text-ink-muted">{APP_SUBTITLE}</p>
+        <div className="min-w-0 flex-1">
+          <p className="text-base font-bold leading-snug text-school">{APP_CLASS_LABEL}</p>
+          <h1 className="mt-1 text-[1.5rem] font-bold leading-tight tracking-tight text-school">
+            {APP_TITLE}
+          </h1>
+          <p className="mt-1.5 text-sm font-medium leading-relaxed text-ink-muted">{APP_SUBTITLE}</p>
+        </div>
       </div>
     </header>
   );
