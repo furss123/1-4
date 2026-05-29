@@ -12,7 +12,7 @@ export function AppShell({ assessments }: AppShellProps) {
     <div className="relative mx-auto flex min-h-full w-full max-w-app flex-col bg-surface-end">
       <Header />
 
-      <main className="flex-1 space-y-3 pb-4">
+      <main className="space-y-3">
         <RoadmapView assessments={assessments} />
       </main>
 

@@ -11,7 +11,7 @@ export function PageFrame({ children, mainClassName = "" }: PageFrameProps) {
   return (
     <div className="relative mx-auto flex min-h-full w-full max-w-app flex-col bg-surface-end">
       <Header />
-      <main className={`flex-1 ${mainClassName}`}>{children}</main>
+      <main className={mainClassName}>{children}</main>
       <SiteFooter />
     </div>
   );
