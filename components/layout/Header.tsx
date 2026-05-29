@@ -21,7 +21,7 @@ export function Header() {
           <p className="text-[calc(1.5625rem-4pt)] font-bold leading-none text-school">
             {APP_CLASS_LABEL}
           </p>
-          <h1 className="text-[calc(2.75rem-4pt)] font-bold leading-none tracking-tight text-school">
+          <h1 className="text-[calc(2.75rem-7pt)] font-bold leading-none tracking-tight text-school">
             {APP_TITLE}
           </h1>
         </div>

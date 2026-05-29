@@ -36,12 +36,13 @@ h3 {
   font-weight: 600;
 }
 
+/* 그라데이션 0~50%와 50~100%를 동일하게 맞춰 루프 시 이음새 없음 */
 @keyframes author-shimmer {
   0% {
-    background-position: 120% center;
+    background-position: 0% 50%;
   }
   100% {
-    background-position: -120% center;
+    background-position: 200% 50%;
   }
 }
 
@@ -63,20 +64,25 @@ h3 {
 .author-sparkle {
   color: #e07a9a;
   background-image: linear-gradient(
-    110deg,
+    90deg,
     #d4567a 0%,
-    #e07a9a 32%,
-    #ffd4e4 50%,
-    #e07a9a 68%,
+    #e07a9a 12%,
+    #ffe8f0 25%,
+    #e07a9a 38%,
+    #d4567a 50%,
+    #e07a9a 62%,
+    #ffe8f0 75%,
+    #e07a9a 88%,
     #d4567a 100%
   );
-  background-size: 220% auto;
+  background-size: 200% 100%;
+  background-repeat: repeat;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation:
-    author-shimmer 3.2s ease-in-out infinite,
-    author-glow 2.6s ease-in-out infinite;
+    author-shimmer 3.6s linear infinite,
+    author-glow 3.6s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
