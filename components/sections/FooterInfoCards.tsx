@@ -6,7 +6,7 @@ import { INQUIRY_CONTACT } from "@/lib/constants";
 
 const NOTICE_ITEMS = [
   "일정은 학교·담임 선생님 안내에 따라 변경될 수 있습니다.",
-  "마감 하루 전에는 파일 형식과 용량을 다시 확인해 주세요.",
+  "제출 형식·파일 용량·AI 활용 규정을 꼭 확인해 주세요.",
   "완료 표시는 제출 후 담임 선생님 확인을 기준으로 합니다.",
 ] as const;
 
@@ -20,31 +20,37 @@ export function FooterInfoCards() {
           type="button"
           onClick={() => setNoticeOpen((v) => !v)}
           aria-expanded={noticeOpen}
-          className="flex min-h-[88px] flex-col items-center justify-center gap-2 rounded-2xl border border-border/60 bg-card px-3 py-4 shadow-sm transition-transform active:scale-[0.98]"
+          className="flex min-h-[120px] flex-col items-start gap-2 rounded-card bg-card p-4 text-left shadow-card transition-transform active:scale-[0.99]"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-50 text-amber-600">
-            <IconMegaphone />
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-light text-primary">
+            <IconMegaphone className="h-5 w-5" />
           </span>
-          <span className="text-sm font-bold text-ink">유의사항</span>
+          <span className="text-sm font-bold text-school">유의사항</span>
+          <span className="text-xs font-medium leading-relaxed text-ink-muted">
+            제출 형식·AI 활용 규정 등을 확인하세요.
+          </span>
         </button>
 
         <a
           href={INQUIRY_CONTACT.href}
-          className="flex min-h-[88px] flex-col items-center justify-center gap-2 rounded-2xl border border-border/60 bg-card px-3 py-4 shadow-sm transition-transform active:scale-[0.98]"
+          className="flex min-h-[120px] flex-col items-start gap-2 rounded-card bg-card p-4 text-left shadow-card transition-transform active:scale-[0.99]"
         >
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-light text-primary">
-            <IconQuestion />
+            <IconQuestion className="h-5 w-5" />
           </span>
-          <span className="text-sm font-bold text-ink">문의하기</span>
+          <span className="text-sm font-bold text-school">문의하기</span>
+          <span className="text-xs font-medium leading-relaxed text-ink-muted">
+            궁금한 점은 담임 선생님께 문의해 주세요.
+          </span>
         </a>
       </div>
 
       {noticeOpen ? (
-        <div className="rounded-2xl border border-amber-100 bg-card px-4 py-3 shadow-sm">
+        <div className="rounded-card bg-card px-4 py-3 shadow-soft">
           <ul className="space-y-2">
             {NOTICE_ITEMS.map((item) => (
               <li key={item} className="flex gap-2 text-sm font-medium leading-relaxed text-ink-muted">
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-amber-500" aria-hidden />
+                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden />
                 {item}
               </li>
             ))}

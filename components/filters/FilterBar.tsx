@@ -24,10 +24,10 @@ export function FilterBar({ subjects, active, onChange }: FilterBarProps) {
             role="tab"
             aria-selected={selected}
             onClick={() => onChange(subject)}
-            className={`min-h-11 shrink-0 rounded-full px-5 text-sm font-bold transition-all active:scale-[0.98] ${
+            className={`min-h-10 shrink-0 rounded-full px-5 text-sm font-bold transition-all active:scale-[0.98] ${
               selected
-                ? "bg-primary text-white shadow-sm"
-                : "bg-[#E8ECF3] text-ink-muted hover:bg-[#dfe4ed]"
+                ? "bg-primary text-white shadow-soft"
+                : "bg-filter-inactive text-ink-muted"
             }`}
           >
             {subject}

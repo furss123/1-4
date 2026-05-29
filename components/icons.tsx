@@ -157,16 +157,21 @@ export function HeaderIllustration({ className = "h-24 w-24" }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
     >
-      <rect x="20" y="12" width="48" height="60" rx="8" fill="#EFF6FF" stroke="#3B82F6" strokeWidth="2" />
-      <path d="M30 28h28M30 38h20M30 48h24" stroke="#93C5FD" strokeWidth="3" strokeLinecap="round" />
+      <rect x="18" y="14" width="52" height="64" rx="10" fill="#EFF6FF" stroke="#2D68D7" strokeWidth="2" />
+      <path d="M30 30h32M30 42h22M30 54h28" stroke="#93C5FD" strokeWidth="2.5" strokeLinecap="round" />
       <path
-        d="M58 58l18 10-18 10V58z"
-        fill="#3B82F6"
-        stroke="#2563EB"
+        d="M62 62l16 12-16 8V62z"
+        fill="#2D68D7"
+        stroke="#1A3088"
         strokeWidth="1.5"
         strokeLinejoin="round"
       />
-      <circle cx="72" cy="24" r="6" fill="#BFDBFE" />
+      <path
+        d="M48 8l4 6 6-1-2 8 3-5 5 4-6-2-4 6-6-3z"
+        fill="#FCD34D"
+        stroke="#F59E0B"
+        strokeWidth="0.5"
+      />
     </svg>
   );
 }

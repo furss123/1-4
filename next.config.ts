@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
   assetPrefix: isGitHubPages ? basePath : undefined,
   trailingSlash: isGitHubPages,
   images: { unoptimized: true },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 };
 
 export default nextConfig;
